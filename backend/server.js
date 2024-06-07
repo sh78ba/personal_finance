@@ -22,7 +22,8 @@ db.once("open",()=>{
     console.log("Successfull connecting the database")
 })
 
-
+//stitch 
+require("./routes/auth.route")(app)
 
 app.listen(server_config.PORT,()=>{
     console.log("Server started at port",server_config.PORT)
