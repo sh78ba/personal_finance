@@ -1,6 +1,7 @@
 const bcrypt=require("bcryptjs")
 const user_model=require("../models/user.model")
 const jwt=require("jsonwebtoken")
+const secret=require("../configs/auth.config")
 
 exports.signup=async(req,res)=>{
     //get all the data
@@ -37,12 +38,33 @@ exports.signup=async(req,res)=>{
 exports.signin=async(req,res)=>{
 
     //get details from body
-    
+    const getUser=await user_model.findOne({email:req.body.email})    
 
     //find if user is present
+    if(getUser==null){
+        return res.status(400).send({
+            message:"Email is not valid"
+        })
+    }
 
     //verify the password
 
+    const isPasswordValid=bcrypt.compareSync(req.body.password,getUser.password)
+
+    if(!isPasswordValid){
+        return res.status(401).send({
+            message:"Password not valid"
+        })
+    }
+
     //create jwt token and expiry
+    const token=jwt.sign({id:getUser._id},secret.SECRET,{
+        expiresIn:43200
+    })
+    res.status(200).send({
+        name:getUser.name,
+        email:getUser.email,
+        accessToken:token
+    })
 
 }
