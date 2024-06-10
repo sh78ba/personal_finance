@@ -30,7 +30,7 @@ exports.transaction=async(req,res)=>{
 
 
 exports.transactionUpdate=async(req,res)=>{
-    const req_body=req.body
+    // const req_body=req.body
 
-    
+
 }
