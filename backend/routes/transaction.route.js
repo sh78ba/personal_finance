@@ -11,5 +11,11 @@ module.exports=(app)=>{
 }
 
 module.exports=(app)=>{
-    app.get("/personalfinance/api/v1/transaction/getAllDetails",transaction_controller.getAllTransactiondataforLoggedInUser)
+    app.get("/personalfinance/api/v1/transaction/getalldetails",transaction_controller.getAllTransactiondataforLoggedInUser)
 }
+
+module.exports=(app)=>{
+    app.delete("/personalfinance/api/v1/transaction/delete",transaction_controller.deleteTransaction)
+}
+
+

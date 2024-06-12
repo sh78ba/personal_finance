@@ -67,15 +67,33 @@ exports.transactionUpdate=async(req,res)=>{
 exports.getAllTransactiondataforLoggedInUser=async(req,res)=>{
     //check for loggedin email
     const getLoggedInEmail=req.query.email
-    
+    try{
     const getTransactions=await transaction_model.find({email:getLoggedInEmail})
-    
-    if(getTransactions){
-        return res.status(200).send(getTransactions)
+    res.status(200).send(getTransactions)
+    }catch(err){
+        console.log("Error while fetching",err);
+        res.status(500).send({
+            message:"Error while fetching"
+        })
     }
-    return res.status(400).send({
-        message:"Data not found"
-    })
 
-    //send all the transactions to the user
+}
+
+
+//delete transaction
+
+exports.deleteTransaction=async(req,res)=>{
+    const getTransactionId=req.query.id
+
+     try{
+    const getTransaction=await transaction_model.findByIdAndDelete({_id:getTransactionId})   
+        res.status(200).send({
+         message:"Successfully deleted",
+        })
+    }catch(err){
+        console.log("Error while deleting",err);
+        res.status(500).send({
+            message:"Error while deleting"
+        })
+    }
 }
