@@ -9,3 +9,7 @@ module.exports=(app)=>{
 module.exports=(app)=>{
     app.put("/personalfinance/api/v1/transaction/update",[transactionMw.verifyTransactionBody],transaction_controller.transactionUpdate)
 }
+
+module.exports=(app)=>{
+    app.get("/personalfinance/api/v1/transaction/getAllDetails",transaction_controller.getAllTransactiondataforLoggedInUser)
+}

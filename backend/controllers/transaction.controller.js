@@ -22,7 +22,7 @@ exports.transaction=async(req,res)=>{
     }catch(err){
         console.log("Error while inserting into database",err);
         res.status(500).send({
-            messeage:"Error while inserting into database"
+            message:"Error while inserting into database"
         })
     }
 
@@ -30,7 +30,7 @@ exports.transaction=async(req,res)=>{
 
 
 exports.transactionUpdate=async(req,res)=>{
-    const transaction_id=req.body.transaction_id;
+    const transaction_id=req.query.id
 
     // upadte logic 
     const getTransaction=await transaction_model.findOne({_id:transaction_id})   
@@ -56,7 +56,7 @@ exports.transactionUpdate=async(req,res)=>{
     }catch(err){
         console.log("Error while updating",err);
         res.status(500).send({
-            messeage:"Error while updating"
+            message:"Error while updating"
         })
     }
     } 
@@ -64,6 +64,18 @@ exports.transactionUpdate=async(req,res)=>{
 
 //show all datas for the given email id
 
-exports.getAlldataforLoggedInUser=(req,res)=>{
+exports.getAllTransactiondataforLoggedInUser=async(req,res)=>{
+    //check for loggedin email
+    const getLoggedInEmail=req.query.email
     
+    const getTransactions=await transaction_model.find({email:getLoggedInEmail})
+    
+    if(getTransactions){
+        return res.status(200).send(getTransactions)
+    }
+    return res.status(400).send({
+        message:"Data not found"
+    })
+
+    //send all the transactions to the user
 }
