@@ -58,7 +58,7 @@ exports.signin=async(req,res)=>{
     }
 
     //create jwt token and expiry
-    const token=jwt.sign({id:getUser._id},secret.SECRET,{
+    const token=jwt.sign({email:getUser.email},secret.SECRET,{
         expiresIn:43200
     })
     res.status(200).send({
