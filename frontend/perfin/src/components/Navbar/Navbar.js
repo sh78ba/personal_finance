@@ -8,7 +8,7 @@ import { CiLogout } from "react-icons/ci";
 
 const Navbar = () => {
   return (
-    <div className='w-1/6 text-lg bg-blue-400 h-screen p-4 text-white'>
+    <div className='text-lg bg-blue-400 h-screen p-4 text-white'>
         <div className='profile align-middle  text-center'> 
         <div className=' mx-auto w-10'><img className='rounded-full'src={profile_img} alt='profile'></img></div>
         <div className=' my-1'>UserName</div>
