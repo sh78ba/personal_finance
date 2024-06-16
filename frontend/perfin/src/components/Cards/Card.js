@@ -1,10 +1,10 @@
 import React from 'react'
-import Piechartcard from './Piechartcard'
+import Barchartcard from './Barchartcard'
 
 
 const Card = () => {
   return (
-    <div className='border-2 p-4 inline-block text-center bg-white'>
+    <div className='border-2 p-4 inline-block text-center bg-white ' >
         <h3 className='text-2xl'>Expanse Tracker</h3>
         <div>
             <div className='flex'>
@@ -20,11 +20,12 @@ const Card = () => {
                 
             </div>
 
-            <div>
-            <div className='w-3/6'>
-        <Piechartcard>
+            <div className='flex'>
+          
+            <div className=''>
+                <Barchartcard>
 
-        </Piechartcard>
+                </Barchartcard>
             </div>
             
             </div>

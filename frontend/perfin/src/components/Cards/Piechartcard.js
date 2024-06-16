@@ -8,7 +8,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const Piechartcard = () => {
     
   return (
-    <div>
+    <div className=''>
         <Pie
   data={{
     labels:['Rent', 'Food',"Electricity"],
@@ -29,7 +29,13 @@ const Piechartcard = () => {
     },
   ],}
   }
- 
+  options={{plugins: {
+    legend: {
+      display: false,
+    },
+  },}}
+
+  
 />
     </div>
   )
