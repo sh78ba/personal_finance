@@ -5,6 +5,7 @@ import { FaSearchDollar } from "react-icons/fa";
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import { LuListTodo } from "react-icons/lu";
 import { CiLogout } from "react-icons/ci";
+import { Link} from 'react-router-dom';
 
 const Navbar = () => {
   return (
@@ -17,8 +18,8 @@ const Navbar = () => {
 
         </div>
         <div className='navigation mt-6 '>
-            <div className='cursor-pointer my-3 p-3 flex items-center hover:bg-blue-500 rounded'><AiOutlineDashboard/><p className='ml-2'>Dashboard</p></div>
-            <div className='cursor-pointer my-3  p-3 flex items-center  hover:bg-blue-500 rounded'><FaSearchDollar/><p className='ml-2'>Expanse</p></div>
+            <Link to="/"><div className='cursor-pointer my-3 p-3 flex items-center hover:bg-blue-500 rounded'><AiOutlineDashboard/><p className='ml-2'>Dashboard</p></div></Link>
+           <Link to="/expense"> <div className='cursor-pointer my-3  p-3 flex items-center  hover:bg-blue-500 rounded'><FaSearchDollar/><p className='ml-2'>Expense</p></div></Link>
             <div className='cursor-pointer my-3 p-3 flex items-center  hover:bg-blue-500 rounded'><FaMoneyCheckAlt/><p className='ml-2'>Budget</p></div>
             <div className='cursor-pointer my-3 p-3 flex items-center  hover:bg-blue-500 rounded'><LuListTodo/><p className='ml-2'>Todo</p></div>
            

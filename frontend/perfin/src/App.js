@@ -1,15 +1,15 @@
 
+import { RouterProvider } from 'react-router-dom';
 import './App.css';
-import MainPage from './components/Body/MainPage';
-import Navbar from './components/Navbar/Navbar';
+import router from "./components/Pages/Router"
+
 
 function App() {
   return (
-    <div className="App flex">
-      <div className='w-1/6 '><Navbar/></div>
-      <div className='w-5/6'><MainPage/></div>
+   <>
+   <RouterProvider router={router}/>
 
-    </div>
+   </>
   );
 }
 

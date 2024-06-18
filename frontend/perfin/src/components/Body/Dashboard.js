@@ -3,7 +3,7 @@ import Card from '../Cards/Card'
 
 
 
-const MainPage = () => {
+const Dashboard = () => {
   return (
     <div className='p-4 bg-blue-100 h-screen flex flex-wrap justify-around'>
   <div>
@@ -24,7 +24,7 @@ const MainPage = () => {
 
   <div>
     <Card>
-        
+
     </Card>
   </div>
 
@@ -34,4 +34,4 @@ const MainPage = () => {
   )
 }
 
-export default MainPage
+export default Dashboard
