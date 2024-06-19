@@ -4,10 +4,13 @@ import './App.css';
 import router from "./components/Pages/Router"
 
 
+
 function App() {
+
   return (
    <>
    <RouterProvider router={router}/>
+
 
    </>
   );

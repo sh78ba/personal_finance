@@ -8,7 +8,7 @@ const GetDate = () => {
         const month = today.getMonth() + 1;
         const year = today.getFullYear();
         const date = today.getDate();
-        return `${dayname[day]}  ${month}-${date}-${year}`;
+        return `${dayname[day]}  ${date}-${month}-${year}`;
 
 }
 

@@ -3,13 +3,19 @@ import Card from '../Cards/Card'
 import GetDate from '../Cards/GetDate'
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
+import Modal from '../Cards/Modal'
+import { useState } from 'react';
+
 
 const Expense = () => {
-
+    const [showModal,setShowModal]=useState(false)
   return (
     <div className='p-4 text-center bg-blue-100 h-screen'>
         
         <Card cardheading={"Expense By Category"} title1={"Income this Month"} title2={"Expense this Month"} incomeamount={50000} expanseamount={20000} charttype={"pie"}/>
+        <div>
+
+        </div>
         <div className='flex-col '>
             <div className='flex justify-between w-2/3 mx-auto'>
             <div>
@@ -35,7 +41,7 @@ const Expense = () => {
       <th>Type</th>
       <th>Amount</th>
       <th>Description</th>
-      <th>Edit/Delete</th>
+     
     </tr>
   </thead>
   <tbody>
@@ -67,8 +73,10 @@ const Expense = () => {
 
         </div>
         <div>
-        <button type="button" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">Add Expense</button>
+        <button type="button" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 " onClick={()=>setShowModal(true)}> Add Expense</button>
+        {showModal&&<Modal onClose={()=>setShowModal(false)}/>}
         </div>
+     
     </div>
   )
 }
