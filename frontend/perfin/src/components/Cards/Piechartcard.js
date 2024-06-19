@@ -9,9 +9,9 @@ const Piechartcard = () => {
     
   return (
     <div className=''>
-        <Pie
+        <Pie 
   data={{
-    labels:['Rent', 'Food',"Electricity"],
+    labels:['Credit Card', 'Bank',"Investment"],
   datasets:[
     {
       data: [25000, 10000, 2000],
@@ -30,10 +30,9 @@ const Piechartcard = () => {
   ],}
   }
   options={{plugins: {
-    legend: {
-      display: false,
-    },
-  },}}
+   
+    
+  },maintainAspectRatio: false}}
 
   
 />
