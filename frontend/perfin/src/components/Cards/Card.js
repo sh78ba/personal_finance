@@ -6,9 +6,9 @@ import Piechartcard from './Piechartcard'
 const Card = (props) => {
     
   return (
-    <div className='border-2 p-4 inline-block text-center bg-white rounded-lg' >
+    <div className='border-2 p-4 inline-block text-center bg-white rounded-lg ' >
         <h3 className='text-2xl my-2'>{props.cardheading}</h3>
-        <div>
+        <div className=''>
             <div className='flex '>
             <div className='border-2 p-2 mx-3 rounded-lg bg-green-200'>
                 <h4>{props.title1}</h4>

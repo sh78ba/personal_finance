@@ -16,7 +16,7 @@ const Expense = () => {
         <div>
 
         </div>
-        <div className='flex-col '>
+        <div className='flex-col my-3'>
             <div className='flex justify-between w-2/3 mx-auto'>
             <div>
             <h1 className='text-lg '>
@@ -33,7 +33,7 @@ const Expense = () => {
 
            
             <div className='my-3 '> 
-           <table className='w-2/3 table-auto border-collapse text-left mx-auto justify-between'>
+           <table className='w-11/12 sm:w-2/3 table-auto border-collapse text-left mx-auto justify-between'>
     
   <thead>
     <tr>
@@ -73,7 +73,7 @@ const Expense = () => {
 
         </div>
         <div>
-        <button type="button" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 " onClick={()=>setShowModal(true)}> Add Expense</button>
+        <button type="button" className="text-white bg-green-700 hover:bg-green-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 " onClick={()=>setShowModal(true)}> Add Expense</button>
         {showModal&&<Modal onClose={()=>setShowModal(false)}/>}
         </div>
      
