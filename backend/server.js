@@ -1,10 +1,14 @@
 const express=require("express")
 const mongoose=require("mongoose")
 const app=express()
+const cors=require("cors")
 const db_config=require("./configs/db.config")
 const server_config=require("./configs/server.config")
 const bcrypt=require("bcryptjs")
 
+
+//fors cors
+app.use(cors());
 //for getting object in JSON format
 app.use(express.json())
 

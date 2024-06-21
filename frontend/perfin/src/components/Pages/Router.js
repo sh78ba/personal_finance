@@ -3,27 +3,28 @@ import { createBrowserRouter } from 'react-router-dom'
 import Dashboard from '../Body/Dashboard'
 import Root from './Root'
 import Expense from '../Body/Expense'
+import Signin from '../SignInSignUp/Signin'
 
-const router=createBrowserRouter(
-
-    [
-    {
-        path:"/",
-        element:<Root/>,
-        children:[
+const router=createBrowserRouter([
+        {
+          path: "/signin",
+          element: <Signin />,
+        },
+        {
+          path: "/",
+          element: <Root />,
+          children: [
             {
-                path:"/",
-                element:<Dashboard/>,
-                index:true
+              path: "/dashboard",
+              element: <Dashboard />,
+              index: true
             },
             {
-                path:"/expense",
-                element:<Expense/>
+              path: "/expense",
+              element: <Expense />
             }
-
-        ]
-    }
-
-])
+          ]
+        }
+          ])
 
 export default router

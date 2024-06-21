@@ -1,54 +1,19 @@
-// import React from 'react'
-// import profile_img from "../../images/profile.webp"
-// import { AiOutlineDashboard } from "react-icons/ai";
-// import { FaSearchDollar } from "react-icons/fa";
-// import { FaMoneyCheckAlt } from "react-icons/fa";
-// import { LuListTodo } from "react-icons/lu";
-// import { CiLogout } from "react-icons/ci";
-// import { Link} from 'react-router-dom';
 
-// const Navbar = () => {
-//   return (
-//     <div className='text-lg bg-blue-400 h-screen p-4 text-white '>
-//         <div className='profile align-middle  text-center'> 
-//         <div className=' mx-auto w-10'><img className='rounded-full'src={profile_img} alt='profile'></img></div>
-//         <div className=' my-1'>UserName</div>
-//        <div className=' my-1 text-base'>email@email.com</div>
-//        <div className='cursor-pointer my-1 text-base rounded-md bg-white text-blue-400'>Edit Profile</div>
-
-//         </div>
-//         <div className='navigation mt-6 '>
-//             <Link to="/"><div className='cursor-pointer my-3 p-3 flex items-center hover:bg-blue-500 rounded'><AiOutlineDashboard/><p className='ml-2'>Dashboard</p></div></Link>
-//            <Link to="/expense"> <div className='cursor-pointer my-3  p-3 flex items-center  hover:bg-blue-500 rounded'><FaSearchDollar/><p className='ml-2'>Expense</p></div></Link>
-//             <div className='cursor-pointer my-3 p-3 flex items-center  hover:bg-blue-500 rounded'><FaMoneyCheckAlt/><p className='ml-2'>Budget</p></div>
-//             <div className='cursor-pointer my-3 p-3 flex items-center  hover:bg-blue-500 rounded'><LuListTodo/><p className='ml-2'>Todo</p></div>
-           
-
-            
-//              </div>
-//             <div className=''>
-//             <hr className="h-px my-6 border-0 bg-blue-500"></hr>
-//             <div className='cursor-pointer flex  p-3 items-center text-base  hover:bg-blue-500 rounded'><CiLogout/><p className='ml-2'>Logout</p></div>
-//             </div>
-//     </div>
-//   )
-// }
-
-// export default Navbar
-
-
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import profile_img from "../../images/profile.webp";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { FaSearchDollar } from "react-icons/fa";
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import { LuListTodo } from "react-icons/lu";
 import { CiLogout } from "react-icons/ci";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi'; // Hamburger menu icon
+import { AuthContext } from '../SignInSignUp/AuthContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const {useremail,username,handleLogout}=useContext(AuthContext)
+  const navigate=useNavigate()
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -56,6 +21,11 @@ const Navbar = () => {
 
   const closeMenu=()=>{
     setIsOpen(false);
+  }
+
+  const logout=()=>{
+    handleLogout();
+    navigate("/signin")
   }
 
 
@@ -71,14 +41,14 @@ const Navbar = () => {
               <img className={`rounded-full ${isOpen ? 'block' : 'hidden'} md:block `} src={profile_img} alt="profile" />
             </div>
             <div className={`mt-2 ${isOpen ? 'block' : 'hidden'} md:block`}>
-              <div className='my-1'>UserName</div>
-              <div className='my-1 text-base'>email@email.com</div>
+              <div className='my-1'>{username}</div>
+              <div className='my-1 text-base'>{useremail}</div>
               <div className='cursor-pointer my-1 text-base rounded-md bg-white text-blue-400'>Edit Profile</div>
             </div>
           </div>
         </div>
         <div className={`mt-6 ${isOpen ? 'block' : 'hidden'} md:block`}>
-          <Link to="/">
+          <Link to="/dashboard">
             <div className='cursor-pointer my-3 p-3 flex items-center hover:bg-blue-500 rounded' onClick={closeMenu}>
               <AiOutlineDashboard />
               <p className='ml-2'>Dashboard</p>
@@ -101,7 +71,7 @@ const Navbar = () => {
           <hr className="h-px my-6 border-0 bg-blue-500"></hr>
           <div className='cursor-pointer flex p-3 items-center text-base hover:bg-blue-500 rounded'>
             <CiLogout />
-            <p className='ml-2'>Logout</p>
+            <p className='ml-2'onClick={logout}>Logout</p>
           </div>
         </div>
       </div>

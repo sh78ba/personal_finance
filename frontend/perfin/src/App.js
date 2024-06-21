@@ -2,7 +2,7 @@
 import { RouterProvider } from 'react-router-dom';
 import './App.css';
 import router from "./components/Pages/Router"
-import Signin from './components/SignInSignUp/Signin';
+import { AuthProvider } from './components/SignInSignUp/AuthContext';
 
 
 
@@ -10,9 +10,10 @@ function App() {
 
   return (
    <>
-   {/* <RouterProvider router={router}/> */}
+   <AuthProvider>
+   <RouterProvider router={router}/>
 
-<Signin/>
+   </AuthProvider>
    </>
   );
 }
