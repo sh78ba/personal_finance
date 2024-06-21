@@ -6,6 +6,7 @@ import axios from "axios"
 import { AuthContext } from './AuthContext';
 import { useNavigate } from 'react-router-dom';
 
+
 const Signin = () => {
     const [signIn, setSignIn] = useState(true);
     const [password,setPassword]=useState("")
@@ -54,11 +55,29 @@ const Signin = () => {
        }
     }
 
-    const handleSignUp=(e)=>{
+
+    //signup
+    const handleSignUp=async(e)=>{
        e.preventDefault();
-       console.log(password);
-       console.log(email);
-       console.log(name);
+       try{
+        const response=await axios.post("http://localhost:8888/personalfinance/api/v1/signup",{
+            name,
+            email,
+            password,
+        })
+        setErrorMsg(response.data.message)
+        setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+
+    }catch(error){
+        console.error("Authentication failed:", error);
+        if (error.response && error.response.data) {
+            setErrorMsg(error.response.data.message)
+          }else {
+            setErrorMsg("An unexpected error occurred. Please try again.");
+          }
+        }
     }
 
 
@@ -69,6 +88,7 @@ const Signin = () => {
             {signIn ? (
                 <div className='flex-row text-center h-fit w-96 bg-blue-200 px-5 py-6 text-2xl rounded-lg'>
                     <form>
+                    <div className='w-full rounded-lg  flex items-center justify-around bg-red-300'>{errorMsg}</div>
                         <h1 className='text-3xl'>Login</h1>
                         <div>
                             <div className='flex flex-col'>
@@ -82,12 +102,13 @@ const Signin = () => {
                             <button className='w-full rounded-lg my-2 p-2 border-black border-2 flex items-center justify-around bg-blue-300'><FaFacebook />Login with Facebook</button>
                             <button className='w-full rounded-lg my-2 p-2 border-black border-2 flex items-center justify-around bg-white'><FaGoogle />Login with Google</button>
                         </div>
-                        <div className='w-full rounded-lg  flex items-center justify-around bg-red-300'>{errorMsg}</div>
+                       
                     </form>
                 </div>
             ) : (
                 <div className='flex-row text-center w-96 h-fit bg-blue-200 px-5 py-6 text-2xl rounded-lg'>
                     <form>
+                    <div className='w-full rounded-lg  flex items-center justify-around bg-red-300'>{errorMsg}</div>
                         <h1 className='text-3xl'>SignUp</h1>
                         <div>
                             <div className='flex flex-col'>
@@ -101,7 +122,8 @@ const Signin = () => {
                             <button className='w-full rounded-lg my-2 p-2 border-black border-2 flex items-center justify-around bg-blue-300'><FaFacebook />Login with Facebook</button>
                             <button className='w-full rounded-lg my-2 p-2 border-black border-2 flex items-center justify-around bg-white'><FaGoogle />Login with Google</button>
                         </div>
-                        <div className='w-full rounded-lg  flex items-center justify-around bg-red-300'>{errorMsg}</div>
+                       
+
                     </form>
                 </div>
             )}

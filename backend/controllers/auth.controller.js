@@ -25,7 +25,7 @@ exports.signup=async(req,res)=>{
             userId:user_created._id
         }
 
-        res.status(201).send(res_object)
+        res.status(201).send({message:"SignUp Successfull!! Please SignIn"})
 
     }catch(err){
         console.log("Error while registering the user",err)
