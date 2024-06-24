@@ -31,7 +31,7 @@ const handleDescription=(e)=>{
 const handleSubmit=async(e)=>{
   e.preventDefault();
   try{
-    const response=await axios.post("http://localhost:8888/personalfinance/api/v1/transaction/create",
+    await axios.post("http://localhost:8888/personalfinance/api/v1/transaction/create",
       {
         email: localStorage.getItem('useremail'),
         category: category,
@@ -46,7 +46,6 @@ const handleSubmit=async(e)=>{
         }
     })
     
-    console.log(response);
   }catch(error){
     console.error("Transation Creation failed:", error);
         if (error.response && error.response.data) {
@@ -88,3 +87,5 @@ const handleSubmit=async(e)=>{
 }
 
 export default Modal
+
+
