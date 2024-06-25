@@ -31,10 +31,9 @@ exports.transaction=async(req,res)=>{
 
 exports.transactionUpdate=async(req,res)=>{
     const transaction_id=req.query.id
-
     // upadte logic 
     const getTransaction=await transaction_model.findOne({_id:transaction_id})   
-    
+  
     if(getTransaction){
    
     const req_body=req.body
@@ -46,7 +45,6 @@ exports.transactionUpdate=async(req,res)=>{
         amount:req_body.amount,
         description:req_body.description
     };
-
     // insert it into the database
 
     try{

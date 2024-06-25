@@ -4,7 +4,6 @@ const app=express()
 const cors=require("cors")
 const db_config=require("./configs/db.config")
 const server_config=require("./configs/server.config")
-const bcrypt=require("bcryptjs")
 
 
 //fors cors
