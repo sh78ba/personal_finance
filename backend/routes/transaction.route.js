@@ -9,11 +9,14 @@ module.exports=(app)=>{
     //update transaction
     app.put("/personalfinance/api/v1/transaction/update",[transactionMw.verifyTransactionBody,authMw.verifyToken],transaction_controller.transactionUpdate)
 
-    //getalldetails of transaction
+    //getalldetails of transaction filter by date
     app.get("/personalfinance/api/v1/transaction/getalldetails",[authMw.verifyToken],transaction_controller.getAllTransactiondataforLoggedInUser)
 
     //delete transaction
     app.delete("/personalfinance/api/v1/transaction/delete",[authMw.verifyToken],transaction_controller.deleteTransaction)
+
+    //get transaction by date
+    // app.get("/personalfinance/api/v1/transaction/getbydate"[authMw.verifyToken],)
 }
 
 

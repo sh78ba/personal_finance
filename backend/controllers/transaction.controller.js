@@ -62,20 +62,52 @@ exports.transactionUpdate=async(req,res)=>{
 
 //show all datas for the given email id
 
-exports.getAllTransactiondataforLoggedInUser=async(req,res)=>{
-    //check for loggedin email
-    const getLoggedInEmail=req.query.email
-    try{
-    const getTransactions=await transaction_model.find({email:getLoggedInEmail})
-    res.status(200).send(getTransactions)
-    }catch(err){
-        console.log("Error while fetching",err);
-        res.status(500).send({
-            message:"Error while fetching"
-        })
-    }
+const { parse } = require('date-fns');
+const { startOfDay, endOfDay } = require('date-fns');
 
-}
+exports.getAllTransactiondataforLoggedInUser = async (req, res) => {
+  const getLoggedInEmail = req.query.email;
+  const { date } = req.query;
+
+  let dateFilter = {};
+  if (date) {
+    const parsedDate = parse(date, 'dd/MM/yyyy', new Date());
+    const start = startOfDay(parsedDate);
+    const end = endOfDay(parsedDate);
+    dateFilter.createdAt = {
+      $gte: start,
+      $lte: end
+    };
+  }
+
+  try {
+    const getTransactions = await transaction_model.find({
+      email: getLoggedInEmail,
+      ...dateFilter
+    });
+    res.status(200).send(getTransactions);
+  } catch (err) {
+    console.log("Error while fetching", err);
+    res.status(500).send({
+      message: "Error while fetching"
+    });
+  }
+};
+
+// exports.getAllTransactiondataforLoggedInUser=async(req,res)=>{
+//     //check for loggedin email
+//     const getLoggedInEmail=req.query.email
+//     try{
+//     const getTransactions=await transaction_model.find({email:getLoggedInEmail})
+//     res.status(200).send(getTransactions)
+//     }catch(err){
+//         console.log("Error while fetching",err);
+//         res.status(500).send({
+//             message:"Error while fetching"
+//         })
+//     }
+
+// }
 
 
 //delete transaction

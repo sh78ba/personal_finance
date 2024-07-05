@@ -183,11 +183,19 @@ const Expense = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
   const fetchData = async () => {
     try {
+      const date = new Date();
+      let day = date.getDate();
+      let month = date.getMonth() + 1;
+      let year = date.getFullYear();
+  
+      // Ensure day and month are two digits
+      day = day < 10 ? '0' + day : day;
+      month = month < 10 ? '0' + month : month;
+  
       const response = await axios.get("http://localhost:8888/personalfinance/api/v1/transaction/getalldetails", {
-        params: { email: localStorage.getItem("useremail") },
+        params: { email: localStorage.getItem("useremail"), date: `${day}/${month}/${year}` },
         headers: {
           'x-access-token': localStorage.getItem('token'),
           'Content-Type': 'application/json'
@@ -203,10 +211,11 @@ const Expense = () => {
       }
     }
   };
-
+  
   const refreshData = () => {
     fetchData();
   };
+  
 
   const handleEdit = (expense) => {
     setIsEditing(true);
