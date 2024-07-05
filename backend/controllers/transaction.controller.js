@@ -60,7 +60,7 @@ exports.transactionUpdate=async(req,res)=>{
     } 
 }
 
-//show all datas for the given email id
+//show all datas for the given email id 
 
 const { parse } = require('date-fns');
 const { startOfDay, endOfDay } = require('date-fns');
