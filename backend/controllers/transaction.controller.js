@@ -94,20 +94,6 @@ exports.getAllTransactiondataforLoggedInUser = async (req, res) => {
   }
 };
 
-// exports.getAllTransactiondataforLoggedInUser=async(req,res)=>{
-//     //check for loggedin email
-//     const getLoggedInEmail=req.query.email
-//     try{
-//     const getTransactions=await transaction_model.find({email:getLoggedInEmail})
-//     res.status(200).send(getTransactions)
-//     }catch(err){
-//         console.log("Error while fetching",err);
-//         res.status(500).send({
-//             message:"Error while fetching"
-//         })
-//     }
-
-// }
 
 
 //delete transaction
