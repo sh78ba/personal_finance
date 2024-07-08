@@ -4,7 +4,6 @@ import Piechartcard from './Piechartcard'
 
 
 const Card = (props) => {
-    
   return (
     <div className='border-2 p-4 inline-block text-center bg-white rounded-lg ' >
         <h3 className='text-2xl my-2'>{props.cardheading}</h3>
@@ -24,12 +23,12 @@ const Card = (props) => {
 
             <div className='flex justify-center '>
           
-            {/* <div className=''> */}
+    
                 
-            {props.charttype === 'bar' ? <Barchartcard /> : <Piechartcard />}
+            {props.charttype === 'bar' ? <Barchartcard data={props.chartData} /> : <Piechartcard data={props.chartData} labels={props.labels}/>}
 
 
-            {/* </div> */}
+          
             
             </div>
         </div>

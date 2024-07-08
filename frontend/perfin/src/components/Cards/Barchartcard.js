@@ -5,15 +5,15 @@ import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Lege
 // Register the necessary components
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
-const Barchartcard = () => {
+const Barchartcard = ({data}) => {
   return (
     <div>
         <Bar data={{
             labels:['Food', 'Rent', 'Electricity', 'Shopping', 'Medicine'],
             datasets: [
                 {
-                  label: 'Expanse',
-                  data: [200,300,100,500,300],
+                  
+                  data: data,
                   backgroundColor: 'rgba(255, 99, 132, 0.5)',
                 },
               ],

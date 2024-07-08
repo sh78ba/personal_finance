@@ -5,16 +5,16 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 // Register the necessary components
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const Piechartcard = () => {
-    
+const Piechartcard = ({data,labels}) => {    
   return (
+  
     <div className=''>
         <Pie 
   data={{
-    labels:['Credit Card', 'Bank',"Investment"],
+    labels:labels,
   datasets:[
     {
-      data: [25000, 10000, 2000],
+      data: data,
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',

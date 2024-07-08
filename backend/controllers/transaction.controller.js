@@ -95,6 +95,38 @@ exports.getAllTransactiondataforLoggedInUser = async (req, res) => {
 };
 
 
+//get monthly transaction details 
+
+const { startOfMonth, endOfMonth } = require('date-fns');
+
+exports.getAllTransactiondataforLoggedInUserMonthly = async (req, res) => {
+  const getLoggedInEmail = req.query.email;
+
+  const now = new Date();
+  const start = startOfMonth(now);
+  const end = endOfMonth(now);
+
+  let dateFilter = {
+    createdAt: {
+      $gte: start,
+      $lte: end
+    }
+  };
+
+  try {
+    const getTransactions = await transaction_model.find({
+      email: getLoggedInEmail,
+      ...dateFilter
+    });
+    res.status(200).send(getTransactions);
+  } catch (err) {
+    console.log("Error while fetching", err);
+    res.status(500).send({
+      message: "Error while fetching"
+    });
+  }
+};
+
 
 //delete transaction
 

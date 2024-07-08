@@ -13,10 +13,10 @@ module.exports=(app)=>{
     app.get("/personalfinance/api/v1/transaction/getalldetails",[authMw.verifyToken],transaction_controller.getAllTransactiondataforLoggedInUser)
 
     //delete transaction
-    app.delete("/personalfinance/api/v1/transaction/delete",[authMw.verifyToken],transaction_controller.deleteTransaction)
+    app.delete("/personalfinance/api/v1/transaction/delete",authMw.verifyToken,transaction_controller.deleteTransaction)
 
-    //get transaction by date
-    // app.get("/personalfinance/api/v1/transaction/getbydate"[authMw.verifyToken],)
+    //get transaction monthly
+    app.get("/personalfinance/api/v1/transaction/getmonthly",authMw.verifyToken,transaction_controller.getAllTransactiondataforLoggedInUserMonthly)
 }
 
 
