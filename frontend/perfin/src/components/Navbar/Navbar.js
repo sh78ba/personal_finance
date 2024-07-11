@@ -43,7 +43,7 @@ const Navbar = () => {
             <div className={`mt-2 ${isOpen ? 'block' : 'hidden'} md:block`}>
               <div className='my-1'>{username}</div>
               <div className='my-1 text-base'>{useremail}</div>
-              <div className='cursor-pointer my-1 text-base rounded-md bg-white text-blue-400'>Edit Profile</div>
+              {/* <div className='cursor-pointer my-1 text-base rounded-md bg-white text-blue-400'>Edit Profile</div> */}
             </div>
           </div>
         </div>
