@@ -17,6 +17,9 @@ module.exports=(app)=>{
 
     //get transaction monthly
     app.get("/personalfinance/api/v1/transaction/getmonthly",authMw.verifyToken,transaction_controller.getAllTransactiondataforLoggedInUserMonthly)
+
+    //get two year investment
+    app.get("/personalfinance/api/v1/transaction/gettwoyearinvestment",authMw.verifyToken,transaction_controller.getAllInvestmentfortwoyear)
 }
 
 

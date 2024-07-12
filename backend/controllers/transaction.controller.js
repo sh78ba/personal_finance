@@ -145,3 +145,56 @@ exports.deleteTransaction=async(req,res)=>{
         })
     }
 }
+
+
+//two year investment data
+const { startOfYear, endOfYear, subYears } = require('date-fns');
+
+
+exports.getAllInvestmentfortwoyear = async (req, res) => {
+  const getLoggedInEmail = req.query.email;
+
+  const now = new Date();
+  const startOfCurrentYear = startOfYear(now);
+  const endOfCurrentYear = endOfYear(now);
+  const startOfPreviousYear = startOfYear(subYears(now, 1));
+  const endOfPreviousYear = endOfYear(subYears(now, 1));
+
+  let currentYearFilter = {
+    createdAt: {
+      $gte: startOfCurrentYear,
+      $lte: endOfCurrentYear
+    },
+    category: 'INVESTMENT'
+  };
+
+  let previousYearFilter = {
+    createdAt: {
+      $gte: startOfPreviousYear,
+      $lte: endOfPreviousYear
+    },
+    category: 'INVESTMENT'
+  };
+
+  try {
+    const currentYearTransactions = await transaction_model.find({
+      email: getLoggedInEmail,
+      ...currentYearFilter
+    });
+
+    const previousYearTransactions = await transaction_model.find({
+      email: getLoggedInEmail,
+      ...previousYearFilter
+    });
+
+    res.status(200).send({
+      currentYear: currentYearTransactions,
+      previousYear: previousYearTransactions
+    });
+  } catch (err) {
+    console.log("Error while fetching", err);
+    res.status(500).send({
+      message: "Error while fetching"
+    });
+  }
+};

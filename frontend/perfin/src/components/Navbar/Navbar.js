@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import profile_img from "../../images/profile.webp";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { FaSearchDollar } from "react-icons/fa";
-import { FaMoneyCheckAlt } from "react-icons/fa";
+// import { FaMoneyCheckAlt } from "react-icons/fa";
 import { LuListTodo } from "react-icons/lu";
 import { CiLogout } from "react-icons/ci";
 import { Link, useNavigate } from 'react-router-dom';
@@ -36,7 +36,7 @@ const Navbar = () => {
       </button>
       <div className={`bg-blue-400 h-screen p-4 text-white flex flex-col fixed w-screen  ${isOpen ? 'block' : 'hidden'} md:block  md:w-1/5`}>
         <div className='flex justify-between items-center mb-4'>
-          <div className='profile text-center mx-auto'>
+          <div className='profile text-center mx-auto p-4 border-2 rounded-2xl'>
             <div className='mx-auto w-10'>
               <img className={`rounded-full ${isOpen ? 'block' : 'hidden'} md:block `} src={profile_img} alt="profile" />
             </div>
@@ -60,10 +60,10 @@ const Navbar = () => {
               <p className='ml-2'>Expense</p>
             </div>
           </Link>
-          <div className='cursor-pointer my-3 p-3 flex items-center hover:bg-blue-500 rounded' onClick={closeMenu}>
+          {/* <div className='cursor-pointer my-3 p-3 flex items-center hover:bg-blue-500 rounded' onClick={closeMenu}>
             <FaMoneyCheckAlt />
             <p className='ml-2'>Budget</p>
-          </div>
+          </div> */}
           <div className='cursor-pointer my-3 p-3 flex items-center hover:bg-blue-500 rounded' onClick={closeMenu}>
             <LuListTodo />
             <p className='ml-2'>Todo</p>

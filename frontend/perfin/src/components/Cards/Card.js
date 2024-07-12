@@ -25,7 +25,7 @@ const Card = (props) => {
           
     
                 
-            {props.charttype === 'bar' ? <Barchartcard data={props.chartData} /> : <Piechartcard data={props.chartData} labels={props.labels}/>}
+            {props.charttype === 'bar' ? <Barchartcard data={props.chartData} labels={props.labels} label={props.label}/> : <Piechartcard data={props.chartData} labels={props.labels}/>}
 
 
           

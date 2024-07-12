@@ -11,6 +11,10 @@ const Dashboard = () => {
   const [groupCreditCardCredit,setGroupCreditCardCredit]=useState(null)
   const [groupCreditCardDebit,setGroupCreditCardDebit]=useState(null)
   const [chartData,setChartData]=useState(null)
+  const [chartDataCreditCard,setChartDatareditCard]=useState(null)
+  const [currentYearInvestment,setCurrentYearInvestment]=useState(null)
+  const [prevYearInvestment,setPrevYearInvestment]=useState(null)
+  const [investChartData,setInvestChartData]=useState(null)
 
   useEffect(() => {
     fetchData();
@@ -25,6 +29,16 @@ const Dashboard = () => {
         'Content-Type': 'application/json'
       }
     });
+     
+    const twoyearresponse = await axios.get("http://localhost:8888/personalfinance/api/v1/transaction/gettwoyearinvestment", {
+      params: { email: localStorage.getItem("useremail") },
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+      }
+    });
+
+   
 
     const transactions = monthlyresponse.data;
 
@@ -49,6 +63,22 @@ const Dashboard = () => {
       groupedSums.BANK.CREDIT||0,
       groupedSums.BANK.DEBIT||0
     ])
+    setChartDatareditCard([
+      groupedSums["CREDIT CARD"].CREDIT||0,
+      groupedSums["CREDIT CARD"].DEBIT||0
+    ])
+
+    //sum of investment for current year
+    const {currentYear,previousYear}=twoyearresponse.data
+        const currentYearSum = currentYear.reduce((acc, transaction) => acc + transaction.amount, 0);
+        const previousYearSum = previousYear.reduce((acc, transaction) => acc + transaction.amount, 0);
+       setCurrentYearInvestment(currentYearSum)
+       setPrevYearInvestment(previousYearSum)
+
+       setInvestChartData([
+        previousYearSum,
+        currentYearSum
+       ])
 
   } catch (error) {
     console.error("Error fetching transactions:", error);
@@ -63,7 +93,7 @@ const Dashboard = () => {
   return (
     <div className='p-4 bg-blue-100 h-screen flex flex-wrap justify-around z-5 overflow-auto'>
   <div className='my-3'>
-  <Card cardheading={"Credit Card"} title1={"Income this Month"} title2={"Expense this Month"} incomeamount={groupCreditCardCredit} expanseamount={groupCreditCardDebit} charttype={"bar"}>
+  <Card cardheading={"Credit Card"} title1={"Income this Month"} title2={"Expense this Month"} incomeamount={groupCreditCardCredit} expanseamount={groupCreditCardDebit} charttype={"bar"} chartData={chartDataCreditCard} labels={['CREDIT', 'DEBIT']} label={"Credit Usage"}> 
 
 </Card>
   </div>
@@ -73,7 +103,7 @@ const Dashboard = () => {
 </Card>
   </div>
   <div className='my-3'>
-  <Card cardheading={"Investment Tracker"} title1={"Investment this Year"} title2={"Investment last Year"} incomeamount={50000} expanseamount={20000} charttype={"bar"}>
+  <Card cardheading={"Investment Tracker"} title1={"Investment this Year"} title2={"Investment last Year"} incomeamount={currentYearInvestment} expanseamount={prevYearInvestment} charttype={"bar"} chartData={investChartData} labels={['PREVIOUS YEAR', 'CURRENT YEAR']} label={"Investment"}>
 
 </Card>
   </div>
