@@ -20,6 +20,9 @@ module.exports=(app)=>{
 
     //get two year investment
     app.get("/personalfinance/api/v1/transaction/gettwoyearinvestment",authMw.verifyToken,transaction_controller.getAllInvestmentfortwoyear)
+
+    //overall income for current year
+    app.get("/personalfinance/api/v1/transaction/overallincome",authMw.verifyToken,transaction_controller.getoverallIncome)
 }
 
 

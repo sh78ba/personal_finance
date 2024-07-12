@@ -198,3 +198,51 @@ exports.getAllInvestmentfortwoyear = async (req, res) => {
     });
   }
 };
+
+//overall income
+
+
+exports.getoverallIncome = async (req, res) => {
+  const getLoggedInEmail = req.query.email;
+
+  const now = new Date();
+  const start = startOfYear(now);
+  const end = endOfYear(now);
+
+  let dateFilter = {
+    createdAt: {
+      $gte: start,
+      $lte: end
+    }
+  };
+
+  try {
+    const getTransactions = await transaction_model.find({
+      email: getLoggedInEmail,
+      ...dateFilter
+    });
+
+    // Calculate the sum of transactions for 'credit' and 'debit' types
+    const sums = getTransactions.reduce(
+      (acc, transaction) => {
+        if (transaction.type === 'CREDIT') {
+          acc[0] += transaction.amount; // Sum of credits
+        } else if (transaction.type === 'DEBIT') {
+          acc[1] += transaction.amount; // Sum of debits
+        }
+        return acc;
+      },
+      [0, 0] // Initial values for credits and debits
+    );
+    const sumsall = {
+      creditSum: sums[0],
+      debitSum: sums[1]
+    };
+    res.status(200).send(sumsall);
+  } catch (err) {
+    console.log("Error while fetching", err);
+    res.status(500).send({
+      message: "Error while fetching"
+    });
+  }
+};

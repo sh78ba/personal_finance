@@ -15,6 +15,9 @@ const Dashboard = () => {
   const [currentYearInvestment,setCurrentYearInvestment]=useState(null)
   const [prevYearInvestment,setPrevYearInvestment]=useState(null)
   const [investChartData,setInvestChartData]=useState(null)
+  const [creditSum,setCreditSum]=useState(null);
+  const [debitSum,setDebitSum]=useState(null)
+  const [overallIncomeChartData,setOverallIncomeChartData]=useState(null)
 
   useEffect(() => {
     fetchData();
@@ -38,7 +41,14 @@ const Dashboard = () => {
       }
     });
 
-   
+    const overallincomeresponse = await axios.get("http://localhost:8888/personalfinance/api/v1/transaction/overallincome", {
+      params: { email: localStorage.getItem("useremail") },
+      headers: {
+        'x-access-token': localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+      }
+    });
+
 
     const transactions = monthlyresponse.data;
 
@@ -67,6 +77,12 @@ const Dashboard = () => {
       groupedSums["CREDIT CARD"].CREDIT||0,
       groupedSums["CREDIT CARD"].DEBIT||0
     ])
+
+    setCreditSum(overallincomeresponse.data["creditSum"])
+    setDebitSum(overallincomeresponse.data["debitSum"])
+
+    setOverallIncomeChartData([overallincomeresponse.data["creditSum"],overallincomeresponse.data["debitSum"]])
+
 
     //sum of investment for current year
     const {currentYear,previousYear}=twoyearresponse.data
@@ -109,7 +125,7 @@ const Dashboard = () => {
   </div>
 
   <div className='my-3'>
-    <Card cardheading={"Overall Income this Year"} title1={"Income this Year"} title2={"Expanse this Year"} incomeamount={50000} expanseamount={20000} charttype={"pie"}>
+    <Card cardheading={"Overall Income this Year"} title1={"Income this Year"} title2={"Expanse this Year"} incomeamount={creditSum} expanseamount={debitSum} charttype={"pie"} chartData={overallIncomeChartData} labels={["Income this Year","Expense this Year"]}>
 
     </Card>
   </div>
